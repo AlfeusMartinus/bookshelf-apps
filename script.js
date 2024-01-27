@@ -8,13 +8,13 @@ function generateID() {
     return +new Date();
 }
 
-function generateBooksObject(id, title, author, year, isCompleted) {
+function generateBooksObject(id, title, author, year, isComplete) {
     return {
         id,
         title,
         author,
         year,
-        isCompleted
+        isComplete
     }
 }
 
@@ -82,7 +82,7 @@ function addBook() {
         tempCheck = false;
     }
 
-    const bookObject = generateBooksObject(generateId, title, author, year, tempCheck)
+    const bookObject = generateBooksObject(generateId, title, author, parseInt(year), tempCheck)
     books.push(bookObject);
 
     document.dispatchEvent(new Event(RENDER_EVENT));
@@ -90,7 +90,7 @@ function addBook() {
 }
 
 function makeBook(data) {
-    const {id, title, author, year, isCompleted} = data;
+    const {id, title, author, year, isComplete} = data;
 
     const textTitle = document.createElement('h3');
     textTitle.innerText = title;
@@ -109,7 +109,7 @@ function makeBook(data) {
     textContainer.classList.add('book_item');
     textContainer.append(textTitle, textAuthor, textYear, containerButton);
 
-    if (isCompleted) {
+    if (isComplete) {
         const undoButton = document.createElement('button');
         undoButton.classList.add('green')
         undoButton.innerText = 'Belum selesai di Baca';
@@ -152,7 +152,7 @@ function undoBookFromCompleted(bookId) {
         return;
     }
 
-    bookTarget.isCompleted = false;
+    bookTarget.isComplete = false;
     document.dispatchEvent(new Event(RENDER_EVENT));
     saveData();
 }
@@ -173,7 +173,7 @@ function addBookCompleted(bookId) {
         return;
     }
 
-    bookTarget.isCompleted = true;
+    bookTarget.isComplete = true;
     document.dispatchEvent(new Event(RENDER_EVENT));
     saveData();
 }
@@ -236,7 +236,7 @@ document.addEventListener(RENDER_EVENT, function() {
 
     for(const bookItem of books) {
         const bookElement = makeBook(bookItem);
-        if (bookItem.isCompleted) {
+        if (bookItem.isComplete) {
             completedBookList.append(bookElement);
         } else {
             uncompletedBookList.append(bookElement);
