@@ -23,4 +23,4 @@ Kelas ini ditujukan untuk seorang Front-End Web Developer yang ingin mengembangk
 
 ## 🎯Demo
 
-🎏 Jika ingin mencoba klik link 👉 <a href="">disini</a>
+🎏 Jika ingin mencoba klik link 👉 <a href="https://bookslistapp.netlify.app/">disini</a>
